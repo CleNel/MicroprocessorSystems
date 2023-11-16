@@ -32,7 +32,7 @@
 
 start:
   LDR R8, =48
-  LDR R9, =16
+  LDR R9, =10    @ 16 for the actual #
 
   SUB R1, R1, R8
   ADD R0, R1, R0
@@ -41,31 +41,31 @@ start:
   MUL R10, R2, R9
   ADD R0, R10, R0
 
-  LDR R9, =256
+  LDR R9, =100   @ 256 for the actual #
 
   SUB R3, R3, R8
   MUL R10, R3, R9
   ADD R0, R10, R0
 
-  LDR R9, =4096
+  LDR R9, =1000   @ 4096 for the actual #
 
   SUB R4, R4, R8
   MUL R10, R4, R9
   ADD R0, R10, R0
 
-  LDR R9, =65536
+  LDR R9, =10000   @ 65536 for the actual #
 
   SUB R5, R5, R8
   MUL R10, R5, R9
   ADD R0, R10, R0
 
-  LDR R9, =1048576
+  LDR R9, =100000   @ 1048576 for the actual #
 
   SUB R6, R6, R8
   MUL R10, R6, R9
   ADD R0, R10, R0
 
-  LDR R9, =16777216
+  LDR R9, =1000000   @ 16777216 for the actual #
 
   SUB R7, R7, R8
   MUL R10, R7, R9
