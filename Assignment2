@@ -71,6 +71,8 @@ start:
   MUL R10, R7, R9
   ADD R0, R10, R0
 
+  LDR R0, ='R0'
+
 @ -------------- end cut --------------------------
 
 stop:   B	stop
