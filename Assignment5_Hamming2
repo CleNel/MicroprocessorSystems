@@ -58,7 +58,7 @@ start:
 
 	AND R4, R0, #0x8 @ Clear all bits apart from d0 and put in R4
 
-	EOR R3, R2, R4 LSR #1
+	EOR R3, R2, R4, LSR #1
 
 	@ Generate check bit c3
 
@@ -72,7 +72,7 @@ start:
 
 	AND R4, R0, #0x80 @ Clear all bits apart from d0 and put in R4
 
-	EOR R3, R2, R4 LSR #4
+	EOR R3, R2, R4, LSR #4
 
 @ -------------- end cut --------------------------
 
