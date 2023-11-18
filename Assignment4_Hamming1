@@ -26,7 +26,7 @@ start:
 
 	ORR R0, R0, R2, LSL #4 @ Align data bits d4-d7 and combine with d0-d3
 
-	@ Generate check bit c0
+	@ Generate check bit c0 (0, 2, 4, 6, 8, 10, 12, 14)
 
 	EOR R2, R0, R0, LSR #2 @ Generate c0 parity bit using parity tree
 
@@ -38,7 +38,7 @@ start:
 
 	ORR R0, R0, R2 @ Combine check bit c0 with result
 
-	@ Generate check bit c1
+	@ Generate check bit c1 (
 
 	EOR R2, R0, R0, LSR #1 @ Generate c1 parity bit using parity tree
 
