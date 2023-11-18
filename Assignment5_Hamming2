@@ -16,7 +16,63 @@
 @ Upload the code that goes between the dashed lines.
 @ -------------- start cut ------------------------
 
+start:
 
+	LDR	r0, =0xb6b
+
+	EOR R2, R0, R0, LSR #2 @ Generate c0 parity bit using parity tree
+
+	EOR R2, R2, R2, LSR #4 @ ... second iteration ...
+
+	EOR R2, R2, R2, LSR #8 @ ... final iteration
+
+	AND R2, R2, #0x1 @ Clear all but check bit c0
+
+	AND R4, R0, #0x1 @ Clear all bits apart from d0 and put in R4
+
+	EOR R3, R2, R4
+
+	@ Generate check bit c1 (
+
+	EOR R2, R0, R0, LSR #1 @ Generate c1 parity bit using parity tree
+
+	EOR R2, R2, R2, LSR #4 @ ... second iteration ...
+
+	EOR R2, R2, R2, LSR #8 @ ... final iteration
+
+	AND R2, R2, #0x2 @ Clear all but check bit c1
+
+	AND R4, R0, #0x2 @ Clear all bits apart from d0 and put in R4
+
+	EOR R3, R2, R4
+
+	@ Generate check bit c2
+
+	EOR R2, R0, R0, LSR #1 @ Generate c2 parity bit using parity tree
+
+	EOR R2, R2, R2, LSR #2 @ ... second iteration ...
+
+	EOR R2, R2, R2, LSR #8 @ ... final iteration
+
+	AND R2, R2, #0x8 @ Clear all but check bit c2
+
+	AND R4, R0, #0x8 @ Clear all bits apart from d0 and put in R4
+
+	EOR R3, R2, R4 LSR #1
+
+	@ Generate check bit c3
+
+	EOR R2, R0, R0, LSR #1 @ Generate c3 parity bit using parity tree
+
+	EOR R2, R2, R2, LSR #2 @ ... second iteration ...
+
+	EOR R2, R2, R2, LSR #4 @ ... final iteration
+
+	AND R2, R2, #0x80 @ Clear all but check bit c3
+
+	AND R4, R0, #0x80 @ Clear all bits apart from d0 and put in R4
+
+	EOR R3, R2, R4 LSR #4
 
 @ -------------- end cut --------------------------
 
