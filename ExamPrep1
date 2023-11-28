@@ -1,0 +1,22 @@
+@ Write a program that will calculate an even parity bit
+@ for bits 21 5 in register R2 and store it in bit 24
+@ 
+
+        LDR     r2, =0b00011100100010101001011111110011
+
+@ Upload the code that goes between the dashed lines.
+@ -------------- start cut ------------------------
+
+start:
+
+	LDR 	R1, =32 @Used for getting rid of all bits except the one at 5
+	
+	EOR	R4, R2, R2, LSR #16 @Get the parity between 21 and 5
+	AND	R4, R4, R1 @Only get EOR 21 and 5
+
+	MOV	R4, R4, LSL #19 @Shift the value to 24
+	ORR	R2, R4 @Replace the value
+
+@ -------------- end cut --------------------------
+
+stop:   B	stop
