@@ -1,0 +1,60 @@
+@ Write an ARM Assembly Language program that will
+@ determine whether a NULL-terminated ASCII string stored
+@ stored in memory location test is a palindrome.
+@ Your program should be case insensitive.
+@ Your program should store the value 1 in R4 if the string is a
+@ palindrome and should store 0 if it is not.
+@ 
+
+@ Upload the code that goes between the dashed lines.
+@ -------------- start cut ------------------------
+
+start:
+	@ Set up pointers for the start and end of the string
+    LDR r0, =test   @ Load the address of the string
+    LDR r1, =0              @ Initialize the start pointer
+    LDR r2, =0              @ Initialize the end pointer
+
+    @ Find the length of the string
+find_length:
+    LDRB r3, [r0, r2]       @ Load a byte from the end of the string
+    CMP r3, #0              @ Check if it's the null terminator
+    BEQ end_find_length     @ If null terminator is found, exit loop
+    ADD r2, r2, #1          @ Increment the end pointer
+    B find_length
+
+end_find_length:
+    SUB r2, r2, #1          @ Adjust the end pointer to the last valid character
+
+    @ Check if the string is a palindrome
+    CMP r1, r2              @ Compare start and end pointers
+    BGE palindrome_true    @ If start pointer is greater or equal, it's a palindrome
+
+check_palindrome:
+    LDRB r6, [r0, r1]       @ Load a byte from the start of the string
+    LDRB r5, [r0, r2]       @ Load a byte from the end of the string
+	
+    CMP r6, r5              @ Compare the characters
+    BNE not_palindrome      @ If not equal, it's not a palindrome
+    ADD r1, r1, #1          @ Increment the start pointer
+    SUB r2, r2, #1          @ Decrement the end pointer
+    CMP r1, r2              @ Check if the pointers have crossed each other
+    BLT check_palindrome    @ If start pointer is less than end pointer, continue checking
+    B palindrome_true
+
+not_palindrome:
+    MOV r4, #0              @ Set r6 to 0 (indicating false)
+    B end_program
+
+palindrome_true:
+    MOV r4, #1              @ Set r6 to 1 (indicating true)
+
+end_program:
+    BKPT #0                 @ Breakpoint to halt the program
+	
+	
+
+@ -------------- end cut --------------------------
+
+stop:   B	stop
+test:     .asciz "Able was I ere I saw Elba"
