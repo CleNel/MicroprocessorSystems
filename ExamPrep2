@@ -1,0 +1,33 @@
+@ Write a program that will determine the minimun
+@ of a set of 10 unsigned half word values stored in memory location test.
+@ 
+@ Store the result as a word in R8.
+
+@ Upload the code that goes between the dashed lines.
+@ -------------- start cut ------------------------
+
+start:
+	LDR R1, =test
+	LDR R2, =0
+	LDRH R8, [R1]
+	LDR R7, =2
+	B testwh1
+
+wh1:
+	CMP R3, R8 @ If (the new number is lower than the lowest){
+	BLS endwh1
+
+endwh1:
+	MOV R8, R3 @ Replace the old minimum
+
+testwh1:
+	LDRH R3, [R1, R7] @Get the next number
+	ADD R7, #2
+	ADD R2, #1
+	CMP R2, #9 @ while (tmp <= 9)
+	BLS wh1
+
+@ -------------- end cut --------------------------
+
+stop:   B	stop
+test:     .2byte 248, 2188, 1626, 717, 435, 450, 1514, 708, 157, 795
